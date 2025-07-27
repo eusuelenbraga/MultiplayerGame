@@ -31,6 +31,7 @@ Requisições: Fetch API (JavaScript nativo)
 ## ✔️ Funcionalidades: 
 
 Gerenciamento de Jogadores
+
  
 •	Criar Jogador: Adiciona um novo jogador com nome, apelido e email.
 
@@ -44,6 +45,7 @@ Gerenciamento de Jogadores
 
 
 Gerenciamento de Partidas
+
   
 •	Criar Partida: Inicia uma nova partida com um nome, definindo seu status como "Aberta".
 
