@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Jogos Multiplayer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800 font-inter">
+    <div class="container max-w-screen-lg mx-auto my-10 p-8 bg-white rounded-xl shadow-xl">
+        <h1 class="text-4xl font-extrabold mb-8 text-center text-gray-800">Sistema de Gerenciamento de Jogos</h1>
+
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5 pb-3 border-b-2 border-gray-200">Criar Jogador</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <input type="text" id="playerName" placeholder="Nome do Jogador" class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+                <input type="text" id="playerNickname" placeholder="Apelido" class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+                <input type="email" id="playerEmail" placeholder="Email" class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+            </div>
+            <button onclick="createPlayer()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Criar Jogador</button>
+            <p id="createPlayerMessage" class="mt-3 text-sm"></p>
+        </div>
+
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5 pb-3 border-b-2 border-gray-200">Listar Jogadores</h2>
+            <button onclick="listPlayers()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Atualizar Lista de Jogadores</button>
+            <ul id="playersList" class="mt-4 space-y-2 text-gray-800 list-none p-0"></ul>
+        </div>
+
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5 pb-3 border-b-2 border-gray-200">Gerenciar Jogador (Buscar, Atualizar, Deletar)</h2>
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <input type="text" id="playerIdToManage" placeholder="ID do Jogador" class="flex-grow border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+                <button onclick="getPlayerById()" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Buscar</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <input type="text" id="updatePlayerName" placeholder="Novo Nome" class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+                <input type="text" id="updatePlayerNickname" placeholder="Novo Apelido" class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+                <input type="email" id="updatePlayerEmail" placeholder="Novo Email" class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="updatePlayer()" class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Atualizar Jogador</button>
+                <button onclick="deletePlayer()" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Deletar Jogador</button>
+            </div>
+            <p id="managePlayerMessage" class="mt-3 text-sm"></p>
+        </div>
+
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5 pb-3 border-b-2 border-gray-200">Criar Partida</h2>
+            <input type="text" id="matchName" placeholder="Nome da Partida" class="w-full mb-4 border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+            <button onclick="createMatch()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Criar Partida</button>
+            <p id="createMatchMessage" class="mt-3 text-sm"></p>
+        </div>
+
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5 pb-3 border-b-2 border-gray-200">Listar Partidas Abertas</h2>
+            <button onclick="listOpenMatches()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Atualizar Partidas Abertas</button>
+            <p id="openMatchesMessage" class="mt-3 text-sm"></p>
+            <ul id="openMatchesList" class="mt-4 space-y-2 text-gray-800 list-none p-0"></ul>
+        </div>
+
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5 pb-3 border-b-2 border-gray-200">Listar Todas as Partidas</h2>
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <button onclick="listAllMatches()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Atualizar Todas as Partidas</button>
+                <button onclick="clearMatchHistory()" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Deletar Todas as Partidas</button>
+            </div>
+            <p id="allMatchesMessage" class="mt-3 text-sm"></p>
+            <ul id="allMatchesList" class="mt-4 space-y-2 text-gray-800 list-none p-0"></ul>
+        </div>
+
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5 pb-3 border-b-2 border-gray-200">Sair de Partida</h2>
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <input type="text" id="matchIdToJoinLeave" placeholder="ID da Partida" class="flex-grow border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+                <input type="text" id="playerIdToJoinLeave" placeholder="ID do Jogador" class="flex-grow border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+                <button onclick="leaveMatch()" class="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Sair</button>
+            </div>
+            <p id="joinLeaveMatchMessage" class="mt-3 text-sm"></p>
+        </div>
+
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5 pb-3 border-b-2 border-gray-200">Finalizar Partida</h2>
+            <input type="text" id="matchIdToFinish" placeholder="ID da Partida" class="w-full mb-4 border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+            <input type="text" id="scoresToFinish" placeholder="Placar (ex: ID1:100,ID2:50)" class="w-full mb-4 border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+            <button onclick="finishMatch()" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Finalizar Partida</button>
+            <p id="finishMatchMessage" class="mt-3 text-sm"></p>
+        </div>
+
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5 pb-3 border-b-2 border-gray-200">Deletar Partida (Individual)</h2>
+            <input type="text" id="matchIdToDelete" placeholder="ID da Partida para Deletar" class="w-full mb-4 border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+            <button onclick="deleteMatch()" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Deletar Partida</button>
+            <p id="deleteMatchMessage" class="mt-3 text-sm"></p>
+        </div>
+
+        <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5 pb-3 border-b-2 border-gray-200">Histórico de Partidas por Jogador</h2>
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <input type="text" id="playerIdForHistory" placeholder="ID do Jogador" class="flex-grow border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200 ease-in-out">
+                <button onclick="getMatchHistoryByPlayer()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Buscar Histórico</button>
+            </div>
+            <p id="matchHistoryMessage" class="mt-3 text-sm"></p>
+            <ul id="matchHistoryList" class="mt-4 space-y-2 text-gray-800 list-none p-0"></ul>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
