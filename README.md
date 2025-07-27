@@ -30,7 +30,7 @@ Requisições: Fetch API (JavaScript nativo)
 
 ## ✔️ Funcionalidades: 
 
-- Gerenciamento de Jogadores
+Gerenciamento de Jogadores
  
 •	Criar Jogador: Adiciona um novo jogador com nome, apelido e email.
 
@@ -42,7 +42,8 @@ Requisições: Fetch API (JavaScript nativo)
 
 •	Deletar Jogador: Remove um jogador do sistema.
 
-- Gerenciamento de Partidas
+
+Gerenciamento de Partidas
   
 •	Criar Partida: Inicia uma nova partida com um nome, definindo seu status como "Aberta".
 
@@ -52,9 +53,10 @@ Requisições: Fetch API (JavaScript nativo)
 
 •	Entrar em Partida: Adiciona um jogador a uma partida aberta.
 
-o	Aviso de Limite: Ao adicionar o 4º jogador, a interface informa que a partida atingiu seu limite.
+ o	Aviso de Limite: Ao adicionar o 4º jogador, a interface informa que a partida atingiu seu limite.
 
-o	Erro de Limite: Se um 5º jogador tentar entrar, o backend retorna um erro.
+ o	Erro de Limite: Se um 5º jogador tentar entrar, o backend retorna um erro.
+
 
 •	Sair de Partida: Remove um jogador de uma partida.
 
@@ -65,6 +67,7 @@ o	Erro de Limite: Se um 5º jogador tentar entrar, o backend retorna um erro.
 •	Histórico de Partidas por Jogador: Exibe todas as partidas finalizadas em que um jogador participou.
 
 •	Deletar Partida: Remove uma partida do sistema.
+
 
 ## 📁 Arquitetura:
 
