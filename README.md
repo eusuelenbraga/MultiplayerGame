@@ -33,23 +33,37 @@ Requisições: Fetch API (JavaScript nativo)
 - Gerenciamento de Jogadores
  
 •	Criar Jogador: Adiciona um novo jogador com nome, apelido e email.
+
 •	Listar Jogadores: Exibe todos os jogadores cadastrados.
+
 •	Buscar Jogador por ID: Recupera e exibe os detalhes de um jogador específico.
+
 •	Atualizar Jogador: Modifica as informações de um jogador existente.
+
 •	Deletar Jogador: Remove um jogador do sistema.
 
 - Gerenciamento de Partidas
   
 •	Criar Partida: Inicia uma nova partida com um nome, definindo seu status como "Aberta".
+
 •	Listar Partidas Abertas: Exibe apenas as partidas que estão disponíveis para jogadores entrarem.
+
 •	Listar Todas as Partidas: Mostra todas as partidas, independentemente do status (Aberta, Em Progresso, Finalizada).
+
 •	Entrar em Partida: Adiciona um jogador a uma partida aberta.
+
 o	Aviso de Limite: Ao adicionar o 4º jogador, a interface informa que a partida atingiu seu limite.
+
 o	Erro de Limite: Se um 5º jogador tentar entrar, o backend retorna um erro.
+
 •	Sair de Partida: Remove um jogador de uma partida.
+
 •	Iniciar Partida: Altera o status de uma partida de "Aberta" para "Em Progresso".
+
 •	Finalizar Partida: Altera o status de uma partida para "Finalizada" e permite registrar pontuações.
+
 •	Histórico de Partidas por Jogador: Exibe todas as partidas finalizadas em que um jogador participou.
+
 •	Deletar Partida: Remove uma partida do sistema.
 
 ## 📁 Arquitetura:
@@ -57,7 +71,9 @@ o	Erro de Limite: Se um 5º jogador tentar entrar, o backend retorna um erro.
 O projeto segue uma arquitetura Cliente-Servidor (Client-Server), onde o frontend (cliente) se comunica com o backend (servidor) através de uma API RESTful.
 
 •	Frontend (Cliente): Uma aplicação web estática (HTML, CSS, JavaScript) que fornece a interface do usuário. Ela envia requisições HTTP para o backend para realizar operações e exibe os dados retornados.
+
 •	Backend (API RESTful): Uma aplicação ASP.NET Core que expõe endpoints HTTP para gerenciar os dados do jogo. Ela processa as requisições do frontend, interage com o banco de dados e retorna as respostas.
+
 •	Banco de Dados: Um banco de dados SQLite que armazena todas as informações sobre jogadores e partidas.
 
 Foram aplicados também,  os seguintes padrões de design e princípios arquiteturais:
@@ -65,8 +81,11 @@ Foram aplicados também,  os seguintes padrões de design e princípios arquitet
 •	MVC (Model-View-Controller) no Backend: Embora seja uma API RESTful (sem "View" no sentido tradicional), o ASP.NET Core segue o padrão MVC.
  o	Model: Representado pelas classes Player.cs e Match.cs, que definem a estrutura dos dados.
  o	Controller: Representado por PlayersController.cs e MatchesController.cs, que lidam com as requisições HTTP, orquestram as operações e retornam as respostas.
+ 
 •	Padrão Repositório (Repository Pattern): Implementado através da classe GameRepository.cs. Este padrão abstrai a lógica de acesso a dados do restante da aplicação, tornando o código mais limpo, testável e desacoplado do ORM (Entity Framework Core) e do banco de dados específico.
+
 •	Injeção de Dependência (Dependency Injection - DI): Utilizado extensivamente no ASP.NET Core. O GameRepository e o GameDbContext são injetados nos controladores e no repositório, respectivamente. Isso promove a inversão de controle e facilita a testabilidade e manutenção do código.
+
 •	RESTful API Design: Os endpoints do backend são projetados seguindo os princípios REST, utilizando verbos HTTP (GET, POST, PUT, DELETE) para as operações CRUD e URLs baseadas em recursos.
 
 ## 📋 Instruções:
